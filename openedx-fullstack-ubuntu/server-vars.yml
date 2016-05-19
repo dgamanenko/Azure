@@ -1,6 +1,4 @@
 ---
-# Copyright (c) Microsoft Corporation. All Rights Reserved.
-# Licensed under the MIT license. See LICENSE file on the project webpage for details.
 
 # Sample Open edX on Azure configuration
 # see: https://github.com/edx/configuration/blob/master/playbooks/roles/edxapp/defaults/main.yml
