@@ -11,9 +11,8 @@
     },
     "adminPassword": {
       "type": "securestring",
-      "defaultValue": "137#azureuser",
       "metadata": {
-        "description": "Administrator password (default: 137#azureuser)."
+        "description": "Administrator password."
       }
     },
     "dnsLabelPrefix": {
