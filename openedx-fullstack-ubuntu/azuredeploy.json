@@ -44,6 +44,12 @@
         "description": "DNS Label for the EDX PREVIEW."
       }
     },
+    "EDX-SiteName": {
+      "type": "string",
+      "metadata": {
+        "description": "DNS Label for the EDX PREVIEW."
+      }
+    },
 
     "vmSize": {
       "type": "string",
@@ -86,7 +92,7 @@
     "openedxVersion": "named-release/dogwood.3",
     "scriptDownloadUri": "https://raw.githubusercontent.com/dgamanenko/Azure/master/openedx-fullstack-ubuntu/",
     "installScript": "install-openedx.sh",
-    "installCommand": "[concat('bash -c ''nohup ./', variables('installScript'), ' ', variables('openedxVersion'), ' </dev/null &>/var/log/azure/openedx-install.log &''')]",
+    "installCommand": "[concat('bash -c ''nohup ./', variables('installScript'), ' ', variables('openedxVersion'), ' ', parameters('EDX-SiteName'), ' ', parameters('LMS-DNS'), ' ', parameters('CMS-DNS'), ' ', parameters('PREVIEW-DNS'), ' </dev/null &>/var/log/azure/openedx-install.log &''')]",
     "vmName": "[parameters('vmName')]",
     "osImagePublisher": "Canonical",
     "osImageOffer": "UbuntuServer",

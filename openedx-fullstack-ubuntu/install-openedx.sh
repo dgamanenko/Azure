@@ -7,6 +7,11 @@ export OPENEDX_RELEASE=$1
 CONFIG_REPO=https://github.com/edx/configuration.git
 ANSIBLE_ROOT=/edx/app/edx_ansible
 
+EDXAPP_PLATFORM_NAME=$2
+EDXAPP_SITE_NAME=$3
+EDXAPP_CMS_SITE_NAME=$4
+EDXAPP_PREVIEW_LMS_BASE: $5
+
 wget https://raw.githubusercontent.com/edx/configuration/master/util/install/ansible-bootstrap.sh -O- | bash
 
 bash -c "cat <<EOF >extra-vars.yml
