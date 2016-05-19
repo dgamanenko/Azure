@@ -47,7 +47,7 @@
     "EDX-SiteName": {
       "type": "string",
       "metadata": {
-        "description": "DNS Label for the EDX PREVIEW."
+        "description": "Open Edx Site Name."
       }
     },
 
