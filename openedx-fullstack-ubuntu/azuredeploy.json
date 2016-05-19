@@ -4,7 +4,7 @@
   "parameters": {
     "vmName": {
       "type": "string",
-      "default": "edx-vm",
+      "defaultValue": "edx-vm",
       "metadata": {
         "description": "Virtual Machine name (default: edx-vm)."
       },
