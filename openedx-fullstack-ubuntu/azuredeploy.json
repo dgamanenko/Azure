@@ -4,9 +4,8 @@
   "parameters": {
     "adminUsername": {
       "type": "string",
-      "defaultValue": "azureuser",
       "metadata": {
-        "description": "Administrator username."
+        "description": "Username for the Virtual Machine."
       }
     },
     "adminPassword": {
