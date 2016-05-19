@@ -1,9 +1,9 @@
 # Deploy Open edX FullStack on Ubuntu
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fopenedx-fullstack-ubuntu%2Fmaster%2Fazuredeploy.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fdgamanenko%2FAzure%2Fmaster%2Fopenedx-fullstack-ubuntu%2Fazuredeploy.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
-<a href="https://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Fdgamanenko%2FAzure%2Fopenedx-fullstack-ubuntu%2Fmaster%2Fazuredeploy.json" target="_blank">
+<a href="https://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Fdgamanenko%2FAzure%2Fmaster%2Fopenedx-fullstack-ubuntu%2Fazuredeploy.json" target="_blank">
     <img src="http://armviz.io/visualizebutton.png"/>
 </a>
 
@@ -17,4 +17,3 @@ You can learn more about Open edX and fullstack here:
 - [Source Code](https://github.com/edx/edx-platform)
 
 *Note that this template uses a different license than the [Open edX](https://github.com/edx/edx-platform/blob/master/LICENSE) platform.*
-
