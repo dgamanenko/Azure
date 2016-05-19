@@ -3,8 +3,8 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "adminUsername": {
- -      "value": "azureuser"
- -  },
+       "value": "azureuser"
+   },
     "adminPassword": {
       "value": "GEN-PASSWORD"
     },
