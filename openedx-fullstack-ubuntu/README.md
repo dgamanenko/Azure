@@ -16,4 +16,3 @@ You can learn more about Open edX and fullstack here:
 - [Running FullStack](https://openedx.atlassian.net/wiki/display/OpenOPS/Running+Fullstack)
 - [Source Code](https://github.com/edx/edx-platform)
 
-*Note that this template uses a different license than the [Open edX](https://github.com/edx/edx-platform/blob/master/LICENSE) platform.*
