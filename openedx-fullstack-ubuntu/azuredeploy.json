@@ -6,7 +6,8 @@
       "type": "string",
       "metadata": {
         "description": "Virtual Machine name (default: edx-vm)."
-      },
+      }
+    },
     "adminUsername": {
       "type": "string",
       "metadata": {
