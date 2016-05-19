@@ -2,6 +2,13 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "adminUsername": {
+      "type": "string",
+      "defaultValue": "openedxuser",
+      "metadata": {
+        "description": "Administrator username."
+      }
+    },
     "adminPassword": {
       "type": "securestring",
       "metadata": {
@@ -59,7 +66,7 @@
     "vmName": "jumpbox2",
     "osImagePublisher": "Canonical",
     "osImageOffer": "UbuntuServer",
-    "osImageSKU": "12.04.5-LTS",
+    "osImageSKU" : "12.04.5-LTS",
     "publicIPAddressName": "myPublicIP",
     "publicIPAddressType": "Dynamic",
     "OSDiskName": "osdisk",
@@ -80,7 +87,7 @@
     {
       "apiVersion": "[variables('apiVersion')]",
       "type": "Microsoft.Storage/storageAccounts",
-      "name": "[object Object]vhdsa",
+      "name": "[variables('storageAccountName')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "accountType": "[variables('storageAccountType')]"
@@ -89,7 +96,7 @@
     {
       "apiVersion": "[variables('apiVersion')]",
       "type": "Microsoft.Network/publicIPAddresses",
-      "name": "myPublicIP",
+      "name": "[variables('publicIPAddressName')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
@@ -101,7 +108,7 @@
     {
       "apiVersion": "[variables('apiVersion')]",
       "type": "Microsoft.Network/virtualNetworks",
-      "name": "VNET",
+      "name": "[variables('virtualNetworkName')]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
         "[variables('nsgID')]"
@@ -128,7 +135,7 @@
     {
       "apiVersion": "[variables('apiVersion')]",
       "type": "Microsoft.Network/networkSecurityGroups",
-      "name": "node-nsg",
+      "name": "[variables('nsgName')]",
       "location": "[resourceGroup().location]",
       "properties": {
         "securityRules": [
@@ -180,7 +187,7 @@
     {
       "apiVersion": "[variables('apiVersion')]",
       "type": "Microsoft.Network/networkInterfaces",
-      "name": "jumpbox2-nic",
+      "name": "[concat(variables('vmName'), '-nic')]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
         "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
@@ -206,7 +213,7 @@
     {
       "apiVersion": "[variables('apiVersion')]",
       "type": "Microsoft.Compute/virtualMachines",
-      "name": "jumpbox2",
+      "name": "[variables('vmName')]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
         "[concat('Microsoft.Storage/storageAccounts/', variables('storageAccountName'))]",
@@ -249,7 +256,7 @@
     {
       "apiVersion": "[variables('apiVersion')]",
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "jumpbox2/installscript",
+      "name": "[concat(variables('vmName'), '/installscript')]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
         "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
