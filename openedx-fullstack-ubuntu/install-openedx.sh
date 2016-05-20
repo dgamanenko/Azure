@@ -11,6 +11,7 @@ EDXAPP_SITE_NAME=$3
 EDXAPP_CMS_SITE_NAME=$4
 EDXAPP_PREVIEW_LMS_BASE=$5
 
+bash -c "sed -i '2iedx_platform_version: \"$OPENEDX_RELEASE\"' server-vars.yml"
 bash -c "sed -i '2iEDXAPP_PLATFORM_NAME_AZURE: \"$EDXAPP_PLATFORM_NAME\"' server-vars.yml"
 bash -c "sed -i '2iEDXAPP_SITE_NAME_AZURE: \"$EDXAPP_SITE_NAME\"' server-vars.yml"
 bash -c "sed -i '2iEDXAPP_CMS_SITE_NAME_AZURE: \"$EDXAPP_CMS_SITE_NAME\"' server-vars.yml"
