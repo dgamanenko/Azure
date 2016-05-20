@@ -34,7 +34,7 @@ edx_platform_version: \"$OPENEDX_RELEASE\"
 certs_version: \"$OPENEDX_RELEASE\"
 forum_version: \"$OPENEDX_RELEASE\"
 xqueue_version: \"$OPENEDX_RELEASE\"
-configuration_version: \"$OPENEDX_RELEASE\"
+configuration_version: \"microsoft-oauth2\"
 edx_ansible_source_repo: \"$CONFIG_REPO\"
 COMMON_SSH_PASSWORD_AUTH: \"yes\"
 EOF"
@@ -45,7 +45,7 @@ cd /tmp
 git clone $CONFIG_REPO
 
 cd configuration
-git checkout $OPENEDX_RELEASE
+git checkout microsoft-oauth2
 pip install -r requirements.txt
 
 cd playbooks
