@@ -93,13 +93,18 @@ EDXAPP_COURSE_ABOUT_VISIBILITY_PERMISSION: 'see_about_page'
 # EDXAPP_NEWRELIC_CMS_APPNAME: "{{ '{{ EDXAPP_CMS_SITE_NAME_AZURE }}' }}"
 # NEWRELIC_LICENSE_KEY: 'XXXXXXXXXX'
 
+EDXAPP_ENABLE_THIRD_PARTY_AUTH: true
 
-EDXAPP_THIRD_PARTY_AUTH_BACKENDS:
-- "social.backends.google.GoogleOAuth2"
-- "social.backends.linkedin.LinkedinOAuth2"
-- "social.backends.facebook.FacebookOAuth2"
-- "social.backends.twitter.TwitterOAuth"
-- "third_party_auth.saml.SAMLAuthBackend"
+EDXAPP_THIRD_PARTY_AUTH_BACKENDS: [
+    "sso_edx_microsoft.backends.microsoft.MicrosoftBackend",
+    "sso_edx_microsoft.backends.microsoft.CMSMicrosoftBackend"
+]
+
+EDXAPP_CMS_MICROSOFT_MAKO_TEMPLATES: [
+    "/edx/app/edxapp/venvs/edxapp/src/microsoft-oauth2/sso_edx_microsoft/templates/cms"
+]
+
+EDXAPP_AZURE_AD_ID: "{{ '{{ EDXAPP_AZURE_AD_CLIENT_ID }}' }}"
 
 # If you want disable link on page, just set null
 EDXAPP_MKTG_URL_LINK_MAP:
