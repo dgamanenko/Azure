@@ -11,19 +11,13 @@ EDXAPP_CMS_SITE_NAME=$4
 EDXAPP_PREVIEW_LMS_BASE=$5
 
 
-# bash -c "cat <<EOF >>server-vars.yml
+bash -c "cat <<EOF >>server-vars.yml
 
-# EDXAPP_PLATFORM_NAME: \"$EDXAPP_PLATFORM_NAME\"
-# EDXAPP_SITE_NAME: \"$EDXAPP_SITE_NAME\"
-# EDXAPP_CMS_SITE_NAME: \"$EDXAPP_CMS_SITE_NAME\"
-# EDXAPP_PREVIEW_LMS_BASE: \"$EDXAPP_PREVIEW_LMS_BASE\"
-# EOF"
-
-sudo bash -c "sed -i '2iEDXAPP_PLATFORM_NAME_AZURE: \"$EDXAPP_PLATFORM_NAME\"' /edx/app/edx_ansible/server-vars.yml"
-sudo bash -c "sed -i '2iEDXAPP_SITE_NAME_AZURE: \"$EDXAPP_SITE_NAME\"' /edx/app/edx_ansible/server-vars.yml"
-sudo bash -c "sed -i '2iEDXAPP_CMS_SITE_NAME_AZURE: \"$EDXAPP_CMS_SITE_NAME\"' /edx/app/edx_ansible/server-vars.yml"
-sudo bash -c "sed -i '2iEDXAPP_PREVIEW_LMS_BASE_AZURE: \"$EDXAPP_PREVIEW_LMS_BASE\"' /edx/app/edx_ansible/server-vars.yml"
-
+EDXAPP_PLATFORM_NAME: \"$EDXAPP_PLATFORM_NAME\"
+EDXAPP_SITE_NAME: \"$EDXAPP_SITE_NAME\"
+EDXAPP_CMS_SITE_NAME: \"$EDXAPP_CMS_SITE_NAME\"
+EDXAPP_PREVIEW_LMS_BASE: \"$EDXAPP_PREVIEW_LMS_BASE\"
+EOF"
 
 wget https://raw.githubusercontent.com/edx/configuration/master/util/install/ansible-bootstrap.sh -O- | bash
 
