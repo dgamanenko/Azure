@@ -22,8 +22,8 @@ bash -c "sed -i '2iEDXAPP_CMS_SITE_NAME_AZURE: \"$EDXAPP_CMS_SITE_NAME\"' server
 bash -c "sed -i '2iEDXAPP_PREVIEW_LMS_BASE_AZURE: \"$EDXAPP_PREVIEW_LMS_BASE\"' server-vars.yml"
 bash -c "sed -i '2iEDXAPP_AZURE_AD_CLIENT_ID: \"$AZURE_AD_CLIENT_ID\"' server-vars.yml"
 
-SECRET_KEY='XXX'
 # SECRET_KEY=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+SECRET_KEY=$(openssl rand -base64 32)
 bash -c "sed -i '2iEDXAPP_EDXAPP_SECRET_KEY_AZURE: \"$SECRET_KEY\"' server-vars.yml"
 
 wget https://raw.githubusercontent.com/edx/configuration/master/util/install/ansible-bootstrap.sh -O- | bash
