@@ -1,52 +1,169 @@
 ---
 
-# Sample Open edX on Azure configuration
-# see: https://github.com/edx/configuration/blob/master/playbooks/roles/edxapp/defaults/main.yml
+edx_platform_repo: "https://{{ COMMON_GIT_MIRROR }}/raccoongang/edx-platform.git"
+edx_platform_version: "master"
 
-EDXAPP_PLATFORM_NAME: "Open edX on Azure"
+edxapp_use_custom_theme: false
+edxapp_theme_name: 'default'
+edxapp_theme_source_repo: '{{ theme_repo_url }}'
+edxapp_theme_version: '{{ theme_repo_branch }}'
 
-#EDXAPP_TIME_ZONE: "America/New_York"
+EDXAPP_MYSQL_HOST: 'localhost'
+EDXAPP_MYSQL_PORT: '3306'
+EDXAPP_MYSQL_USER: 'edxapp001'
+EDXAPP_MYSQL_PASSWORD: 'password'
 
-# Configure DNS name based on the ARM template parameter
-#EDXAPP_SITE_NAME: "{dnsNameForPublicIP}.cloudapp.azure.com"
-EDXAPP_LMS_SITE_NAME: "{{ EDXAPP_SITE_NAME }}"
-EDXAPP_CMS_SITE_NAME: "{{ EDXAPP_SITE_NAME }}"
-EDXAPP_LMS_BASE: "{{ EDXAPP_SITE_NAME }}"
-EDXAPP_CMS_BASE: "{{ EDXAPP_SITE_NAME }}:18010"
-EDXAPP_PREVIEW_LMS_BASE: "{{ EDXAPP_LMS_BASE }}"
+EDXAPP_MONGO_HOSTS: ['localhost']
 
-# Configure third-party auth
-# see: http://edx.readthedocs.org/projects/edx-installing-configuring-and-running/en/latest/configuration/tpa/
-# see: https://github.com/MSOpenTech/edx-documentation/blob/master/en_us/install_operations/source/configuration/enable_sso.rst
-#EDXAPP_ENABLE_THIRD_PARY_AUTH: true
-#EDXAPP_ENABLE_OAUTH2_PROVIDER: true
+EDXAPP_ELASTIC_SEARCH_HOST: 'localhost'
 
-# Configure Open edX features
-# see: http://edx.readthedocs.org/projects/edx-installing-configuring-and-running/en/latest/feature_flags/feature_flag_index.html
+EDXAPP_MEMCACHE: ['localhost:11211']
+
+EDXAPP_COMMENTS_SERVICE_URL:  'http://localhost:18080'
+
+EDXAPP_XQUEUE_URL: 'http://localhost:18040'
+
+edxapp_cms_gunicorn_port: 8010
+edxapp_cms_gunicorn_host: 127.0.0.1
+edxapp_lms_gunicorn_port: 8000
+edxapp_lms_gunicorn_host: 127.0.0.1
+EDXAPP_LMS_NGINX_PORT: 80
+EDXAPP_CMS_NGINX_PORT: 80
+
+EDXAPP_MEDIA_URL: "/media/"
+EDXAPP_MEDIA_ROOT: "/edx/var/edxapp/media/"
+
+# EDXAPP_GRADE_STORAGE_TYPE: 's3'
+# EDXAPP_GRADE_BUCKET: '{{ EDXAPP_PLATFORM_NAME_AZURE }}-reports'
+# EDXAPP_GRADE_ROOT_PATH: 'grades'
+
+# EDXAPP_AWS_ACCESS_KEY_ID: '{{ aws_access_key }}'
+# EDXAPP_AWS_SECRET_ACCESS_KEY: '{{ aws_secret_key }}'
+
+EDXAPP_FOOTER_ORGANIZATION_IMAGE: "images/logo.png"
+
+EDXAPP_PLATFORM_NAME: "{{ '{{ EDXAPP_PLATFORM_NAME_AZURE }}' }}"
+EDXAPP_LANG: 'en_US.UTF-8'
+EDXAPP_LANGUAGE_CODE : 'en'
+EDXAPP_TIME_ZONE: 'Europe/Kiev'
+
+EDXAPP_SITE_NAME: "{{ '{{ EDXAPP_SITE_NAME_AZURE }}' }}"
+EDXAPP_LMS_SITE_NAME: "{{ '{{ EDXAPP_SITE_NAME }}' }}"
+EDXAPP_CMS_SITE_NAME: "{{ '{{ EDXAPP_CMS_SITE_NAME_AZURE }}' }}"
+EDXAPP_LMS_BASE: "{{ '{{ EDXAPP_SITE_NAME }}' }}"
+EDXAPP_CMS_BASE: "{{ '{{ EDXAPP_CMS_SITE_NAME }}' }}"
+EDXAPP_PREVIEW_LMS_BASE: "{{ '{{ EDXAPP_PREVIEW_LMS_BASE_AZURE }}' }}"
+
+#-------------------------------------------------------------------
+EDXAPP_EMAIL_BACKEND: 'django.core.mail.backends.smtp.EmailBackend'
+
+EDXAPP_EMAIL_HOST: 'localhost'
+EDXAPP_EMAIL_HOST_USER: ''
+EDXAPP_EMAIL_HOST_PASSWORD: ''
+EDXAPP_EMAIL_PORT: 587
+EDXAPP_EMAIL_USE_TLS: true
+EDXAPP_DEFAULT_FROM_EMAIL: 'from@example.com'
+EDXAPP_TECH_SUPPORT_EMAIL: "{{ '{{ EDXAPP_DEFAULT_FROM_EMAIL }}' }}"
+EDXAPP_CONTACT_EMAIL: "{{ '{{ EDXAPP_DEFAULT_FROM_EMAIL }}' }}"
+EDXAPP_BUGS_EMAIL: "{{ '{{ EDXAPP_DEFAULT_FROM_EMAIL }}' }}"
+EDXAPP_DEFAULT_FEEDBACK_EMAIL: "{{ '{{ EDXAPP_DEFAULT_FROM_EMAIL }}' }}"
+EDXAPP_DEFAULT_SERVER_EMAIL: "{{ '{{ EDXAPP_DEFAULT_FROM_EMAIL }}' }}"
+EDXAPP_BULK_EMAIL_DEFAULT_FROM_EMAIL: "{{ '{{ EDXAPP_DEFAULT_FROM_EMAIL }}' }}"
+EDXAPP_PAYMENT_SUPPORT_EMAIL: "{{ '{{ EDXAPP_DEFAULT_FROM_EMAIL }}' }}"
+
+#-------------------------------------------------------------------
+
+EDXAPP_EDXAPP_SECRET_KEY: "{{ '{{ EDXAPP_EDXAPP_SECRET_KEY_AZURE }}' }}"
+
+EDXAPP_ANALYTICS_DASHBOARD_URL: null
+
+EDXAPP_OAUTH_ENFORCE_SECURE: false
+
+EDXAPP_YOUTUBE_API_KEY: null
+
+# Enable "visibility in catalog" functionality
+EDXAPP_COURSE_CATALOG_VISIBILITY_PERMISSION: 'see_in_catalog'
+EDXAPP_COURSE_ABOUT_VISIBILITY_PERMISSION: 'see_about_page'
+
+
+# COMMON_ENABLE_NEWRELIC_APP: true
+# EDXAPP_NEWRELIC_LMS_APPNAME: "{{ '{{ EDXAPP_SITE_NAME_AZURE }}' }}"
+# EDXAPP_NEWRELIC_CMS_APPNAME: "{{ '{{ EDXAPP_CMS_SITE_NAME_AZURE }}' }}"
+# NEWRELIC_LICENSE_KEY: 'XXXXXXXXXX'
+
+
+EDXAPP_THIRD_PARTY_AUTH_BACKENDS:
+- "social.backends.google.GoogleOAuth2"
+- "social.backends.linkedin.LinkedinOAuth2"
+- "social.backends.facebook.FacebookOAuth2"
+- "social.backends.twitter.TwitterOAuth"
+- "third_party_auth.saml.SAMLAuthBackend"
+
+# If you want disable link on page, just set null
+EDXAPP_MKTG_URL_LINK_MAP:
+  ABOUT: 'about'
+  CONTACT: 'contact'
+  FAQ: 'help'
+  COURSES: 'courses'
+  ROOT: 'root'
+  TOS: 'tos'
+  HONOR: 'honor'
+  PRIVACY: 'privacy'
+  PRESS: 'press'
+  BLOG: 'blog'
+  DONATE: 'donate'
+  WHAT_IS_VERIFIED_CERT: 'verified-certificate'
+
+EDXAPP_CMS_MKTG_URLS:
+  TOS: "//{{ EDXAPP_SITE_NAME }}/tos"
+
 EDXAPP_FEATURES:
-  #ENABLE_THIRD_PARTY_AUTH: "{{ EDXAPP_ENABLE_THIRD_PARTY_AUTH }}"
-  #ENABLE_OAUTH2_PROVIDER: "{{ EDXAPP_ENABLE_OAUTH2_PROVIDER }}"
-  #ENABLE_SYSADMIN_DASHBOARD: true
-  #ENABLE_INSTRUCTOR_EMAIL: true
-  #REQUIRE_COURSE_EMAIL_AUTH: true
-  PREVIEW_LMS_BASE: "{{ EDXAPP_PREVIEW_LMS_BASE }}"
-  DISABLE_COURSE_CREATION: true
-
-# Configure remote SMTP server
-#EDXAPP_EMAIL_HOST_USER: "username"
-#EDXAPP_EMAIL_HOST_PASSWORD: "password"
-#EDXAPP_EMAIL_HOST: "smtp.live.com"
-#EDXAPP_EMAIL_PORT: 25
-#EDXAPP_EMAIL_USE_TLS: true
-
-# Configure email addresses
-#EDXAPP_CONTACT_EMAIL: "email"
-#EDXAPP_TECH_SUPPORT_EMAIL: "{{ EDXAPP_CONTACT_EMAIL }}"
-#EDXAPP_BUGS_EMAIL: "{{ EDXAPP_CONTACT_EMAIL }}"
-#EDXAPP_DEFAULT_FROM_EMAIL: "{{ EDXAPP_CONTACT_EMAIL }}"
-#EDXAPP_DEFAULT_FEEDBACK_EMAIL: "{{ EDXAPP_CONTACT_EMAIL }}"
-#EDXAPP_DEFAULT_SERVER_EMAIL: "{{ EDXAPP_CONTACT_EMAIL }}"
-#EDXAPP_BULK_EMAIL_DEFAULT_FROM_EMAIL: "{{ EDXAPP_CONTACT_EMAIL }}"
-
-# Default log levels: DEBUG, INFO, WARNING, ERROR, CRITICAL
-#EDXAPP_LOG_LEVEL: 'INFO'
+  AUTH_USE_OPENID_PROVIDER: true
+  CERTIFICATES_ENABLED: true
+  ENABLE_DISCUSSION_SERVICE: true
+  ENABLE_INSTRUCTOR_ANALYTICS: false
+  PREVIEW_LMS_BASE: "{{ '{{ EDXAPP_PREVIEW_LMS_BASE }}' }}"
+  ENABLE_S3_GRADE_DOWNLOADS: true
+  USE_CUSTOM_THEME: "{{ '{{ edxapp_use_custom_theme }}' }}"
+  ENABLE_MKTG_SITE: "{{ '{{ EDXAPP_ENABLE_MKTG_SITE }}' }}"
+  AUTOMATIC_AUTH_FOR_TESTING: "{{ '{{ EDXAPP_ENABLE_AUTO_AUTH }}' }}"
+  ENABLE_THIRD_PARTY_AUTH: "{{ '{{ EDXAPP_ENABLE_THIRD_PARTY_AUTH }}' }}"
+  ENABLE_VIDEO_UPLOAD_PIPELINE: false
+  ENABLE_DISCUSSION_HOME_PANEL: true
+  ENABLE_COMBINED_LOGIN_REGISTRATION: true
+  ENABLE_CORS_HEADERS: false
+  ENABLE_CROSS_DOMAIN_CSRF_COOKIE: false
+  ENABLE_COUNTRY_ACCESS: false
+  ENABLE_VIDEO_BEACON: false
+  ENABLE_ONLOAD_BEACON: false
+  ENABLE_EDXNOTES: "{{ '{{ EDXAPP_ENABLE_EDXNOTES }}' }}"
+  ENABLE_CREDIT_API: "{{ '{{ EDXAPP_ENABLE_CREDIT_API }}' }}"
+  ENABLE_CREDIT_ELIGIBILITY: "{{ '{{ EDXAPP_ENABLE_CREDIT_ELIGIBILITY }}' }}"
+  ENABLE_SPECIAL_EXAMS: false
+  # ADDITIONAL SETTINGS
+  # Enable certificates
+  CERTIFICATES_HTML_VIEW: true
+  CERTIFICATES_INSTRUCTOR_GENERATION: true
+  # end
+  # Enable bulk emails
+  ENABLE_INSTRUCTOR_EMAIL: true
+  REQUIRE_COURSE_EMAIL_AUTH: false
+  # end
+  # Disable login and registration button when using SSO
+  DISABLE_LOGIN_BUTTON: false
+  COURSES_ARE_BROWSABLE: true
+  # end
+  # Enable sysadmin dashboard on LMS
+  ENABLE_SYSADMIN_DASHBOARD: false
+  # end
+  # Course creation settings
+  ENABLE_CREATOR_GROUP: false
+  DISABLE_COURSE_CREATION: false
+  STUDIO_REQUEST_EMAIL: "{{ '{{ EDXAPP_DEFAULT_FROM_EMAIL }}' }}"
+  # end
+  # Studio copyright link
+  STUDIO_COPYRIGHT_LINK: "//{{ '{{ EDXAPP_LMS_BASE }}' }}"
+  # end
+  # Studio course licensing
+  LICENSING: true
+  # end

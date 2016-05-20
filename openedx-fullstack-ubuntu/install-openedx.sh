@@ -10,20 +10,13 @@ EDXAPP_SITE_NAME=$3
 EDXAPP_CMS_SITE_NAME=$4
 EDXAPP_PREVIEW_LMS_BASE=$5
 
-
-# bash -c "cat <<EOF >>server-vars.yml
-
-# EDXAPP_PLATFORM_NAME: \"$EDXAPP_PLATFORM_NAME\"
-# EDXAPP_SITE_NAME: \"$EDXAPP_SITE_NAME\"
-# EDXAPP_CMS_SITE_NAME: \"$EDXAPP_CMS_SITE_NAME\"
-# EDXAPP_PREVIEW_LMS_BASE: \"$EDXAPP_PREVIEW_LMS_BASE\"
-# EOF"
-
 bash -c "sed -i '2iEDXAPP_PLATFORM_NAME_AZURE: \"$EDXAPP_PLATFORM_NAME\"' server-vars.yml"
 bash -c "sed -i '2iEDXAPP_SITE_NAME_AZURE: \"$EDXAPP_SITE_NAME\"' server-vars.yml"
 bash -c "sed -i '2iEDXAPP_CMS_SITE_NAME_AZURE: \"$EDXAPP_CMS_SITE_NAME\"' server-vars.yml"
 bash -c "sed -i '2iEDXAPP_PREVIEW_LMS_BASE_AZURE: \"$EDXAPP_PREVIEW_LMS_BASE\"' server-vars.yml"
 
+SECRET_KEY=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+bash -c "sed -i '2iEDXAPP_EDXAPP_SECRET_KEY_AZURE: \"$SECRET_KEY\"' server-vars.yml"
 
 wget https://raw.githubusercontent.com/edx/configuration/master/util/install/ansible-bootstrap.sh -O- | bash
 
