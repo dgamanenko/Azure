@@ -64,3 +64,9 @@ from third_party_auth.models import OAuth2ProviderConfig
 OAuth2ProviderConfig.objects.create(enabled=True, icon_class='fa-sign-in', name='microsoft', skip_registration_form=True, skip_email_verification=True, backend_name='microsoft-oauth2', key='$AZURE_AD_APP_KEY', secret='$AZURE_AD_APP_SECRET', other_settings='{}')
 OAuth2ProviderConfig.objects.create(enabled=True, icon_class='fa-sign-in', name='cms-microsoft', skip_registration_form=True, skip_email_verification=True, backend_name='cms-microsoft-oauth2', key='$AZURE_AD_APP_KEY', secret='$AZURE_AD_APP_SECRET', other_settings='{}')
 EOF"
+
+sudo -Hu edxapp bash
+source /edx/app/edxapp/edxapp_env 
+python edx-add-oauth2-backend.py
+exit
+
