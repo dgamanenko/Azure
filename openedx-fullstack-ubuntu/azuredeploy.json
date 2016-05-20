@@ -107,7 +107,7 @@
   "variables": {
     "apiVersion": "2015-06-15",
     "openedxVersion": "dogwood-rg",
-    "scriptDownloadUri": "https://raw.githubusercontent.com/dgamanenko/Azure/master/openedx-fullstack-ubuntu/",
+    "scriptDownloadUri": "https://raw.githubusercontent.com/dgamanenko/Azure/microsoft-oauth2/openedx-fullstack-ubuntu/",
     "installScript": "install-openedx.sh",
     "installCommand": "[concat('bash -c ''nohup ./', variables('installScript'), ' ', variables('openedxVersion'), ' ', parameters('EDX-SiteName'), ' ', parameters('LMS-DNS'), ' ', parameters('CMS-DNS'), ' ', parameters('PREVIEW-DNS'), ' ', parameters('AZURE_AD_CLIENT_ID'), ' ', parameters('AZURE_AD_APP_KEY'), ' ', parameters('AZURE_AD_APP_SECRET'), ' </dev/null &>/var/log/azure/openedx-install.log &''')]",
     "vmName": "[parameters('vmName')]",
