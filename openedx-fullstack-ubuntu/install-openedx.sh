@@ -2,7 +2,8 @@
 
 set -x
 export OPENEDX_RELEASE=$1
-CONFIG_REPO=https://github.com/edx/configuration.git
+# CONFIG_REPO=https://github.com/edx/configuration.git
+CONFIG_REPO=https://github.com/raccoongang/configuration.git
 ANSIBLE_ROOT=/edx/app/edx_ansible
 
 EDXAPP_PLATFORM_NAME=$2
@@ -15,8 +16,8 @@ bash -c "sed -i '2iEDXAPP_SITE_NAME_AZURE: \"$EDXAPP_SITE_NAME\"' server-vars.ym
 bash -c "sed -i '2iEDXAPP_CMS_SITE_NAME_AZURE: \"$EDXAPP_CMS_SITE_NAME\"' server-vars.yml"
 bash -c "sed -i '2iEDXAPP_PREVIEW_LMS_BASE_AZURE: \"$EDXAPP_PREVIEW_LMS_BASE\"' server-vars.yml"
 
-SECRET_KEY=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
-bash -c "sed -i '2iEDXAPP_EDXAPP_SECRET_KEY_AZURE: \"$SECRET_KEY\"' server-vars.yml"
+# SECRET_KEY=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+# bash -c "sed -i '2iEDXAPP_EDXAPP_SECRET_KEY_AZURE: \"$SECRET_KEY\"' server-vars.yml"
 
 wget https://raw.githubusercontent.com/edx/configuration/master/util/install/ansible-bootstrap.sh -O- | bash
 
