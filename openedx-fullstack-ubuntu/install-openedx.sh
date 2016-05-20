@@ -41,16 +41,10 @@ EOF"
 
 sudo -u edx-ansible cp *.yml $ANSIBLE_ROOT
 
-cd /tmp
-git clone $CONFIG_REPO
-
-cd configuration
-git checkout microsoft-oauth2
-pip install -r requirements.txt
-
-cd playbooks
-ansible-playbook -i localhost, -c local edx_sandbox.yml -e@$ANSIBLE_ROOT/server-vars.yml -e@$ANSIBLE_ROOT/extra-vars.yml
-
+#----------------------------------------------------------------------------------
+OAUTH_ROLE_ROOT=$ANSIBLE_ROOT/edx_ansible/playbooks/roles/edx-add-oauth2-backend
+sudo -u edx-ansible mkdir -p $OAUTH_ROLE_ROOT/files
+sudo -u edx-ansible mkdir -p $OAUTH_ROLE_ROOT/tasks
 
 bash -c "cat <<EOF >edx-add-oauth2-backend.py
 #!/usr/bin/env python
@@ -66,8 +60,30 @@ OAuth2ProviderConfig.objects.create(enabled=True, icon_class='fa-sign-in', name=
 OAuth2ProviderConfig.objects.create(enabled=True, icon_class='fa-sign-in', name='cms-microsoft', skip_registration_form=True, skip_email_verification=True, backend_name='cms-microsoft-oauth2', key='$AZURE_AD_APP_KEY', secret='$AZURE_AD_APP_SECRET', other_settings='{}')
 EOF"
 
-sudo -Hu edxapp bash
-source /edx/app/edxapp/edxapp_env 
-python edx-add-oauth2-backend.py
-exit
+sudo -u edx-ansible cp edx-add-oauth2-backend.py $OAUTH_ROLE_ROOT/files/
+
+bash -c "cat <<EOF >main.yml
+- name: Add oauth2 backend
+  script: edx-add-oauth2-backend.py
+EOF"
+
+sudo -u edx-ansible cp main.yml $OAUTH_ROLE_ROOT/files/roles
+#----------------------------------------------------------------------------------
+
+
+cd /tmp
+git clone $CONFIG_REPO
+
+cd configuration
+git checkout microsoft-oauth2
+pip install -r requirements.txt
+
+cd playbooks
+ansible-playbook -i localhost, -c local edx_sandbox.yml -e@$ANSIBLE_ROOT/server-vars.yml -e@$ANSIBLE_ROOT/extra-vars.yml
+
+
+# sudo -Hu edxapp bash
+# source /edx/app/edxapp/edxapp_env 
+# python edx-add-oauth2-backend.py
+# exit
 
