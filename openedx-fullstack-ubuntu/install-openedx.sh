@@ -67,7 +67,9 @@ bash -c "cat <<EOF >main.yml
   script: edx-add-oauth2-backend.py
 EOF"
 
-sudo -u edx-ansible cp main.yml $OAUTH_ROLE_ROOT/files/roles
+sudo -u edx-ansible cp main.yml $OAUTH_ROLE_ROOT/tasks/
+
+sudo -u edx-ansible echo '    - role: edx-add-oauth2-backend' >> /edx/app/edx_ansible/edx_ansible/playbooks/edx_sandbox.yml
 #----------------------------------------------------------------------------------
 
 
