@@ -1,7 +1,6 @@
 ---
 
 edx_platform_repo: "https://{{ COMMON_GIT_MIRROR }}/raccoongang/edx-platform.git"
-edx_platform_version: "master"
 
 theme_repo_url: "https://github.com/raccoongang/edx-theme"
 theme_repo_branch: "master"
