@@ -43,5 +43,7 @@ cd configuration
 git checkout $OPENEDX_RELEASE
 pip install -r requirements.txt
 
+sudo sed -i '/with_items: edx_notes_api_requirements/a\ \ when: edx_notes_api_requirements.stat.exists' /tmp/configuration/playbooks/roles/edx_notes_api/tasks/main.yml
+
 cd playbooks
 ansible-playbook -i localhost, -c local edx_sandbox.yml -e@$ANSIBLE_ROOT/server-vars.yml -e@$ANSIBLE_ROOT/extra-vars.yml
