@@ -30,11 +30,11 @@ wget https://raw.githubusercontent.com/edx/configuration/master/util/install/ans
 bash -c "cat <<EOF >extra-vars.yml
 ---
 edx_platform_version: \"$OPENEDX_RELEASE\"
-certs_version: \"$OPENEDX_RELEASE\"
-forum_version: \"$OPENEDX_RELEASE\"
-xqueue_version: \"$OPENEDX_RELEASE\"
+#certs_version: \"$OPENEDX_RELEASE\"
+#forum_version: \"$OPENEDX_RELEASE\"
+#xqueue_version: \"$OPENEDX_RELEASE\"
 configuration_version: \"$OPENEDX_RELEASE\"
-edx_ansible_source_repo: \"$CONFIG_REPO\"
+#edx_ansible_source_repo: \"$CONFIG_REPO\"
 COMMON_SSH_PASSWORD_AUTH: \"yes\"
 EOF"
 
