@@ -80,7 +80,9 @@ cd configuration
 git checkout microsoft-oauth2
 pip install -r requirements.txt
 
-sudo sed -i '/with_items: edx_notes_api_requirements/a\ \ when: edx_notes_api_requirements.stat.exists' /tmp/configuration/playbooks/roles/edx_notes_api/tasks/main.yml
+bash -c "sed -i '2i- name: Ensure that optional.txt requirements exist' /tmp/configuration/playbooks/roles/edx_notes_api/tasks/main.yml"
+bash -c "sed -i '3i\ \ shell: echo >>/edx/app/edx_notes_api/edx_notes_api/requirements/optional.txt' /tmp/configuration/playbooks/roles/edx_notes_api/tasks/main.yml"
+bash -c "sed -i '4i\ \ sudo_user: \"{{ edx_notes_api_user }}\"' /tmp/configuration/playbooks/roles/edx_notes_api/tasks/main.yml"
 
 cd playbooks
 ansible-playbook -i localhost, -c local edx_sandbox.yml -e@$ANSIBLE_ROOT/server-vars.yml -e@$ANSIBLE_ROOT/extra-vars.yml
