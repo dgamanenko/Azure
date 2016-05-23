@@ -1,6 +1,9 @@
 #!/bin/bash
 
 set -x
+
+sudo gpg --keyserver keyserver.ubuntu.com --recv A1715D88E1DF1F24
+
 export OPENEDX_RELEASE=$1
 # CONFIG_REPO=https://github.com/edx/configuration.git
 CONFIG_REPO=https://github.com/raccoongang/configuration.git
